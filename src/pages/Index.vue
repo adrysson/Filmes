@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center page">
-    <div v-if="filmes.length" class="row">
+    <div v-if="filmes.length" class="row flex-center">
       <div class="my-card-container" :key="`filme-${key}`" v-for="(filme, key) in filmes">
         <q-card class="my-card">
           <q-img
@@ -13,9 +13,11 @@
             </div>
           </q-img>
 
-          <q-card-section>
-            {{ filme.sinopse }}
-          </q-card-section>
+          <div class="sinopse">
+            <q-card-section>
+              {{ filme.sinopse }}
+            </q-card-section>
+          </div>
 
           <q-card-actions>
             <q-btn flat>Detalhe</q-btn>
@@ -67,4 +69,8 @@ export default {
 
 .my-card-container, .page
   padding 10px
+
+.sinopse
+  display inline-block
+  max-height 140px
 </style>
