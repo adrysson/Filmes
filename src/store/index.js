@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 // import example from './module-example'
 import cartaz from './cartaz'
+import assistirDepois from './assistirDepois'
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      cartaz
+      cartaz,
+      assistirDepois
     },
 
     // enable strict mode (adds overhead!)

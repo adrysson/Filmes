@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex">
+  <q-page class="flex flex-center">
     <div v-if="filme" class="detalhe-card-container">
       <q-card class="detalhe-card" flat bordered>
         <q-card-section horizontal>
@@ -49,24 +49,19 @@ export default {
   computed: {
     filmes: {
       get () {
-        if (localStorage.filmes) {
-          return JSON.parse(localStorage.filmes)
-        }
-        return []
+        return this.$store.getters['cartaz/getFilmes']
       },
       set (list) {
-        localStorage.filmes = JSON.stringify(list)
+        this.$store.commit('cartaz/setFilmes', list)
       }
     },
     assistirDepois: {
       get () {
-        if (localStorage.assistirDepois) {
-          return JSON.parse(localStorage.assistirDepois)
-        }
-        return []
+        console.log(this.$store.getters)
+        return this.$store.getters['assistirDepois/getFilmes']
       },
       set (list) {
-        localStorage.assistirDepois = JSON.stringify(list)
+        this.$store.commit('assistirDepois/setFilmes', list)
       }
     }
   },
@@ -78,7 +73,7 @@ export default {
     }
   },
   created () {
-    if (localStorage.filmes) {
+    if (this.filmes) {
       this.error = true
     }
 
@@ -92,7 +87,7 @@ export default {
   },
   methods: {
     isSaved () {
-      if (localStorage.assistirDepois) {
+      if (this.assistirDepois) {
         const filme = this.getFilme(this.assistirDepois)
 
         if (filme) {
