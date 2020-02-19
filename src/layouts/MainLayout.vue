@@ -63,7 +63,7 @@ export default {
         {
           title: 'Assistir depois',
           caption: 'Filmes marcados para assistir depois',
-          icon: 'playlist_add',
+          icon: 'view_list',
           link: '#/assistir-depois'
         }
       ]
