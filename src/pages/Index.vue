@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center page-index">
-    <div v-if="filmesExibidos.length" class="row flex-center">
-      <div class="index-card-container" :key="`filme-${key}`" v-for="(filme, key) in filmesExibidos">
+    <div v-if="filmes.length" class="row flex-center">
+      <div class="index-card-container" :key="`filme-${key}`" v-for="(filme, key) in filmes">
         <q-card class="index-card">
           <q-img
             height="305px"
@@ -42,24 +42,20 @@ export default {
   computed: {
     filmes: {
       get () {
-        if (localStorage.filmes) {
-          return JSON.parse(localStorage.filmes)
-        }
-        return []
+        return this.$store.getters['filmes/getFilmes']
       },
       set (list) {
-        localStorage.filmes = JSON.stringify(list)
+        this.$store.commit('filmes/setFilmes', list)
       }
     }
   },
   data () {
     return {
-      filmesExibidos: [],
       error: false
     }
   },
   async created () {
-    if (!localStorage.filmes) {
+    if (!this.filmes.length) {
       try {
         this.error = false
         this.$q.loading.show({
@@ -72,10 +68,6 @@ export default {
       } finally {
         this.$q.loading.hide()
       }
-    }
-
-    if (!this.error) {
-      this.filmesExibidos = this.filmes
     }
   }
 }
