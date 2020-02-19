@@ -57,7 +57,6 @@ export default {
     },
     assistirDepois: {
       get () {
-        console.log(this.$store.getters)
         return this.$store.getters['assistirDepois/getFilmes']
       },
       set (list) {
