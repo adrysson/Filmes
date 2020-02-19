@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Filmes
+          {{ $route.name }}
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
@@ -68,6 +68,9 @@ export default {
         }
       ]
     }
+  },
+  created () {
+    console.log(this.$route)
   }
 }
 </script>

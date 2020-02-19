@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex">
     <div v-if="filme" class="my-card-detalhe-container">
-      <q-card class="my-card" flat bordered>
+      <q-card class="my-card-detalhe" flat bordered>
         <q-card-section horizontal>
           <q-card-section class="col-5 flex flex-center">
             <q-img
@@ -45,7 +45,7 @@
 
 <script>
 export default {
-  name: 'PageIndex',
+  name: 'PageDetalhe',
   computed: {
     filmes: {
       get () {
