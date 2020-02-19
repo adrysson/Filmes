@@ -16,11 +16,12 @@
               </div>
               <q-space></q-space>
               <q-btn
-                color="grey"
+                :color="filmeIsSaved ? 'primary' : 'grey'"
                 flat
                 dense
                 label="Salvar"
                 icon="playlist_add"
+                @click="salvar"
               ></q-btn>
             </q-card-actions>
             <div class="text-caption text-grey text-justify">
@@ -55,12 +56,24 @@ export default {
       set (list) {
         localStorage.filmes = JSON.stringify(list)
       }
+    },
+    assistirDepois: {
+      get () {
+        if (localStorage.assistirDepois) {
+          return JSON.parse(localStorage.assistirDepois)
+        }
+        return []
+      },
+      set (list) {
+        localStorage.assistirDepois = JSON.stringify(list)
+      }
     }
   },
   data () {
     return {
       error: false,
-      filme: {}
+      filme: {},
+      filmeIsSaved: false
     }
   },
   created () {
@@ -68,14 +81,43 @@ export default {
       this.error = true
     }
 
-    const paramKey = parseInt(this.$route.params.key)
-
-    this.filme = this.filmes.find((filme, key) => {
-      return key === paramKey
-    })
+    this.filme = this.getFilme(this.filmes)
 
     if (!this.filme) {
       this.error = true
+    }
+
+    this.filmeIsSaved = this.isSaved()
+  },
+  methods: {
+    isSaved () {
+      if (localStorage.assistirDepois) {
+        const filme = this.getFilme(this.assistirDepois)
+        if (filme) {
+          return true
+        }
+      }
+      return false
+    },
+    getFilme (list) {
+      const paramKey = parseInt(this.$route.params.key)
+
+      if (list) {
+        return list.find((filme, key) => {
+          return key === paramKey
+        })
+      }
+      return false
+    },
+    salvar () {
+      const filmes = this.assistirDepois
+      if (!this.isSaved()) {
+        filmes.push(this.filme)
+      } else {
+        filmes.splice(this.filme, 1)
+      }
+      this.assistirDepois = filmes
+      this.filmeIsSaved = this.isSaved()
     }
   }
 }
