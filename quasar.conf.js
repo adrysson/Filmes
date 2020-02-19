@@ -48,7 +48,12 @@ module.exports = function (ctx) {
       directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Loading',
+        'QCard',
+        'QCardSection',
+        'QCardActions'
+      ]
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
