@@ -103,28 +103,27 @@ export default {
       }
       return false
     },
+    showMessage (message, type) {
+      this.$q.notify({
+        position: 'top',
+        message,
+        type
+      })
+    },
     salvar () {
-      const messageProperties = {
-        position: 'top'
-      }
-
       if (!this.isSaved()) {
         this.$store.commit('assistirDepois/setFilme', this.filme)
 
-        messageProperties.message = 'Filme marcado para assistir depois'
-        messageProperties.type = 'positive'
+        this.showMessage('Filme marcado para assistir depois', 'positive')
 
         this.filmeIsSaved = true
       } else {
         this.$store.commit('assistirDepois/removeFilme', this.filme)
 
-        messageProperties.message = 'Filme removido da lista de assistir depois'
-        messageProperties.type = 'warning'
+        this.showMessage('Filme removido da lista de assistir depois', 'warning')
 
         this.filmeIsSaved = false
       }
-
-      this.$q.notify(messageProperties)
     }
   }
 }

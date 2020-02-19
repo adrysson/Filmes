@@ -79,22 +79,21 @@ export default {
         })
       }
     },
+    showMessage (message, type) {
+      this.$q.notify({
+        position: 'top',
+        message,
+        type
+      })
+    },
     check (filmeClicado) {
-      const messageProperties = {
-        position: 'top'
-      }
-
       this.$store.commit('assistirDepois/checkFilme', filmeClicado)
 
       if (filmeClicado.assistido) {
-        messageProperties.message = 'Filme marcado como assistido'
-        messageProperties.type = 'positive'
+        this.showMessage('Filme marcado como assistido', 'positive')
       } else {
-        messageProperties.message = 'Filme desmarcado como assistido'
-        messageProperties.type = 'warning'
+        this.showMessage('Filme desmarcado como assistido', 'warning')
       }
-
-      this.$q.notify(messageProperties)
     }
   }
 }
