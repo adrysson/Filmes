@@ -52,7 +52,8 @@ module.exports = function (ctx) {
         'Loading',
         'QCard',
         'QCardSection',
-        'QCardActions'
+        'QCardActions',
+        'Notify'
       ]
     },
 

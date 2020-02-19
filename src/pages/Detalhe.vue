@@ -110,14 +110,24 @@ export default {
       return false
     },
     salvar () {
+      const messageProperties = {
+        position: 'top'
+      }
       const filmes = this.assistirDepois
+
       if (!this.isSaved()) {
         filmes.push(this.filme)
+        messageProperties.message = 'Filme marcado para assistir depois'
+        messageProperties.type = 'positive'
       } else {
         filmes.splice(this.filme, 1)
+        messageProperties.message = 'Filme removido da lista de assistir depois'
+        messageProperties.type = 'warning'
       }
       this.assistirDepois = filmes
       this.filmeIsSaved = this.isSaved()
+
+      this.$q.notify(messageProperties)
     }
   }
 }
