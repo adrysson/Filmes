@@ -1,34 +1,35 @@
 <template>
   <q-page class="flex">
-    <div v-if="filme">
-      <q-card>
-        <q-img
-          :src="filme.poster"
-          basic
-        >
-        </q-img>
-
-          <q-card-section>
+    <div v-if="filme" class="my-card-detalhe-container">
+      <q-card class="my-card" flat bordered>
+        <q-card-section horizontal>
+          <q-card-section class="col-5 flex flex-center">
+            <q-img
+              class="rounded-borders"
+              :src="filme.poster"
+            />
+          </q-card-section>
+          <q-card-section class="q-pt-xs">
+            <div class="text-overline">
+                {{ filme.genero }}
+            </div>
             <div class="text-h5 q-mt-sm q-mb-xs">{{ filme.titulo }}</div>
-            <q-card-actions>
-              <div class="text-overline text-orange-9">
-                  {{ filme.genero }}
-              </div>
-              <q-space></q-space>
-              <q-btn
-                :color="filmeIsSaved ? 'primary' : 'grey'"
-                flat
-                dense
-                label="Salvar"
-                icon="playlist_add"
-                @click="salvar"
-              ></q-btn>
-            </q-card-actions>
-            <div class="text-caption text-grey text-justify">
+            <div class="text-caption text-grey text-justify sinopse">
               {{ filme.sinopseFull }}
             </div>
           </q-card-section>
-
+        </q-card-section>
+        <q-separator></q-separator>
+        <q-card-actions>
+            <q-btn
+              :color="filmeIsSaved ? 'primary' : 'grey'"
+              flat
+              dense
+              label="Salvar"
+              icon="playlist_add"
+              @click="salvar"
+            ></q-btn>
+        </q-card-actions>
       </q-card>
     </div>
     <div v-else>
@@ -89,6 +90,9 @@ export default {
 
     this.filmeIsSaved = this.isSaved()
   },
+  mounted () {
+    console.log(this.$mq)
+  },
   methods: {
     isSaved () {
       if (localStorage.assistirDepois) {
@@ -132,3 +136,12 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+.my-card-detalhe-container
+  padding 10px
+
+.sinopse
+  height 400px
+  overflow auto
+</style>
