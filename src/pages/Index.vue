@@ -81,7 +81,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .index-card
   width 100%
   max-width 305px
