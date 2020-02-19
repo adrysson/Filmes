@@ -20,7 +20,7 @@
           </div>
 
           <q-card-actions>
-            <q-btn :to="{name: 'detalhe', params: { key }}" flat>Detalhe</q-btn>
+            <q-btn :to="{name: 'detalhe', params: { titulo: filme.titulo }}" flat>Detalhe</q-btn>
           </q-card-actions>
         </q-card>
       </div>

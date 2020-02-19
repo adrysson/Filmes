@@ -93,6 +93,7 @@ export default {
     isSaved () {
       if (localStorage.assistirDepois) {
         const filme = this.getFilme(this.assistirDepois)
+
         if (filme) {
           return true
         }
@@ -100,11 +101,9 @@ export default {
       return false
     },
     getFilme (list) {
-      const paramKey = parseInt(this.$route.params.key)
-
       if (list) {
-        return list.find((filme, key) => {
-          return key === paramKey
+        return list.find(filme => {
+          return filme.titulo === this.$route.params.titulo
         })
       }
       return false
@@ -119,13 +118,14 @@ export default {
         filmes.push(this.filme)
         messageProperties.message = 'Filme marcado para assistir depois'
         messageProperties.type = 'positive'
+        this.filmeIsSaved = true
       } else {
         filmes.splice(this.filme, 1)
         messageProperties.message = 'Filme removido da lista de assistir depois'
         messageProperties.type = 'warning'
+        this.filmeIsSaved = false
       }
       this.assistirDepois = filmes
-      this.filmeIsSaved = this.isSaved()
 
       this.$q.notify(messageProperties)
     }
