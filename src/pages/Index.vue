@@ -4,7 +4,7 @@
       <div class="my-card-container" :key="`filme-${key}`" v-for="(filme, key) in filmesExibidos">
         <q-card class="my-card">
           <q-img
-            height="220px"
+            height="305px"
             :src="filme.poster"
             basic
           >
@@ -84,12 +84,13 @@ export default {
 <style lang="stylus">
 .my-card
   width 100%
-  max-width 225px
+  max-width 305px
 
 .my-card-container, .page
   padding 10px
 
 .sinopse
   display inline-block
-  max-height 140px
+  max-height 10px
+
 </style>
