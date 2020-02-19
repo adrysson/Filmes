@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center page">
-    <div v-if="filmes.length" class="row flex-center">
-      <div class="my-card-container" :key="`filme-${key}`" v-for="(filme, key) in filmes">
+    <div v-if="filmesExibidos.length" class="row flex-center">
+      <div class="my-card-container" :key="`filme-${key}`" v-for="(filme, key) in filmesExibidos">
         <q-card class="my-card">
           <q-img
             height="220px"
@@ -39,24 +39,43 @@
 <script>
 export default {
   name: 'PageIndex',
+  computed: {
+    filmes: {
+      get () {
+        if (localStorage.filmes) {
+          return JSON.parse(localStorage.filmes)
+        }
+        return []
+      },
+      set (list) {
+        localStorage.filmes = JSON.stringify(list)
+      }
+    }
+  },
   data () {
     return {
-      filmes: [],
+      filmesExibidos: [],
       error: false
     }
   },
   async created () {
-    try {
-      this.error = false
-      this.$q.loading.show({
-        delay: 400
-      })
-      const response = await this.$axios.get('https://api.myjson.com/bins/194h2g')
-      this.filmes = response.data.filmes
-    } catch (xhr) {
-      this.error = true
-    } finally {
-      this.$q.loading.hide()
+    if (!localStorage.filmes) {
+      try {
+        this.error = false
+        this.$q.loading.show({
+          delay: 400
+        })
+        const response = await this.$axios.get('https://api.myjson.com/bins/194h2g')
+        this.filmes = response.data.filmes
+      } catch (xhr) {
+        this.error = true
+      } finally {
+        this.$q.loading.hide()
+      }
+    }
+
+    if (!this.error) {
+      this.filmesExibidos = this.filmes
     }
   }
 }
