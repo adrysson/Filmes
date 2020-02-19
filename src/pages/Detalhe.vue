@@ -90,9 +90,6 @@ export default {
 
     this.filmeIsSaved = this.isSaved()
   },
-  mounted () {
-    console.log(this.$mq)
-  },
   methods: {
     isSaved () {
       if (localStorage.assistirDepois) {

@@ -42,10 +42,10 @@ export default {
   computed: {
     filmes: {
       get () {
-        return this.$store.getters['filmes/getFilmes']
+        return this.$store.getters['cartaz/getFilmes']
       },
       set (list) {
-        this.$store.commit('filmes/setFilmes', list)
+        this.$store.commit('cartaz/setFilmes', list)
       }
     }
   },
