@@ -52,34 +52,25 @@
 <script>
 export default {
   name: 'PageAssistirDepois',
-  watch: {
-    filmes (list) {
-      localStorage.assistirDepois = JSON.stringify(list)
+  computed: {
+    filmes: {
+      get () {
+        return this.$store.getters['assistirDepois/getFilmes']
+      },
+      set (list) {
+        this.$store.commit('assistirDepois/setFilmes', list)
+      }
     }
   },
   data () {
     return {
-      error: false,
-      filmes: []
+      error: false
     }
   },
-  created () {
-    this.filmes = this.getFilmes()
-  },
   methods: {
-    getFilmes () {
-      if (localStorage.assistirDepois) {
-        return JSON.parse(localStorage.assistirDepois)
-      }
-      return []
-    },
     excluir (filme) {
       if (confirm('Tem certeza que deseja apagar?')) {
-        const filmes = this.filmes
-
-        filmes.splice(filme, 1)
-
-        this.filmes = filmes
+        this.$store.commit('assistirDepois/removeFilme', filme)
 
         this.$q.notify({
           position: 'top',
@@ -93,21 +84,15 @@ export default {
         position: 'top'
       }
 
-      const filmes = this.filmes
+      this.$store.commit('assistirDepois/checkFilme', filmeClicado)
 
-      this.filmes = filmes.map(filme => {
-        if (filme.titulo === filmeClicado.titulo) {
-          filme.assistido = !filme.assistido
-          if (filme.assistido) {
-            messageProperties.message = 'Filme marcado como assistido'
-            messageProperties.type = 'positive'
-          } else {
-            messageProperties.message = 'Filme desmarcado como assistido'
-            messageProperties.type = 'warning'
-          }
-        }
-        return filme
-      })
+      if (filmeClicado.assistido) {
+        messageProperties.message = 'Filme marcado como assistido'
+        messageProperties.type = 'positive'
+      } else {
+        messageProperties.message = 'Filme desmarcado como assistido'
+        messageProperties.type = 'warning'
+      }
 
       this.$q.notify(messageProperties)
     }

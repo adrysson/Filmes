@@ -108,20 +108,22 @@ export default {
       const messageProperties = {
         position: 'top'
       }
-      const filmes = this.assistirDepois
 
       if (!this.isSaved()) {
-        filmes.push(this.filme)
+        this.$store.commit('assistirDepois/setFilme', this.filme)
+
         messageProperties.message = 'Filme marcado para assistir depois'
         messageProperties.type = 'positive'
+
         this.filmeIsSaved = true
       } else {
-        filmes.splice(this.filme, 1)
+        this.$store.commit('assistirDepois/removeFilme', this.filme)
+
         messageProperties.message = 'Filme removido da lista de assistir depois'
         messageProperties.type = 'warning'
+
         this.filmeIsSaved = false
       }
-      this.assistirDepois = filmes
 
       this.$q.notify(messageProperties)
     }
