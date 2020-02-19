@@ -1,8 +1,8 @@
 <template>
-  <q-page class="flex flex-center page">
+  <q-page class="flex flex-center page-index">
     <div v-if="filmesExibidos.length" class="row flex-center">
-      <div class="my-card-container" :key="`filme-${key}`" v-for="(filme, key) in filmesExibidos">
-        <q-card class="my-card">
+      <div class="index-card-container" :key="`filme-${key}`" v-for="(filme, key) in filmesExibidos">
+        <q-card class="index-card">
           <q-img
             height="305px"
             :src="filme.poster"
@@ -13,7 +13,7 @@
             </div>
           </q-img>
 
-          <div class="sinopse">
+          <div class="sinopse-index">
             <q-card-section>
               {{ filme.sinopse }}
             </q-card-section>
@@ -82,14 +82,14 @@ export default {
 </script>
 
 <style lang="stylus">
-.my-card
+.index-card
   width 100%
   max-width 305px
 
-.my-card-container, .page
+.index-card-container, .page-index
   padding 10px
 
-.sinopse
+.sinopse-index
   display inline-block
   max-height 10px
 

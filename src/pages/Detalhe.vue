@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex">
-    <div v-if="filme" class="my-card-detalhe-container">
-      <q-card class="my-card-detalhe" flat bordered>
+    <div v-if="filme" class="detalhe-card-container">
+      <q-card class="detalhe-card" flat bordered>
         <q-card-section horizontal>
           <q-card-section class="col-5 flex flex-center">
             <q-img
@@ -14,7 +14,7 @@
                 {{ filme.genero }}
             </div>
             <div class="text-h5 q-mt-sm q-mb-xs">{{ filme.titulo }}</div>
-            <div class="text-caption text-grey text-justify sinopse">
+            <div class="text-caption text-grey text-justify sinopse-detalhe">
               {{ filme.sinopseFull }}
             </div>
           </q-card-section>
@@ -138,10 +138,10 @@ export default {
 </script>
 
 <style lang="stylus">
-.my-card-detalhe-container
+.detalhe-card-container
   padding 10px
 
-.sinopse
+.sinopse-detalhe
   height 400px
   overflow auto
 </style>
